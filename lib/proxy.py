@@ -210,7 +210,7 @@ class SSHLoadBalancer:
 
         # wait for them all to start
         left = int(timeout)
-        while not all([p.is_connected() for p in self.proxies.values() if p is not None]):
+        while not all(p.is_connected() for p in self.proxies.values() if p is not None):
             left -= 1
             for p in self.proxies.values():
                 if p is not None and (not p.sh.is_alive() or left <= 0):
