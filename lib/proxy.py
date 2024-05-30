@@ -19,7 +19,8 @@ class SSHProxyError(TREVORSprayError):
 
 class SSHProxy:
 
-    def __init__(self, host, port, key=None, key_pass='', ssh_args={}):
+    def __init__(self, host, port, key=None, key_pass='', ssh_args=None):
+        ssh_args = {} if ssh_args is None else ssh_args
 
         self.host = host
         self.port = port
