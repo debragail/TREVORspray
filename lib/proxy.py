@@ -7,6 +7,7 @@ from time import sleep
 import subprocess as sp
 from pathlib import Path
 from .errors import TREVORSprayError
+from security import safe_command
 
 log = logging.getLogger('trevorspray.proxy')
 
@@ -157,7 +158,7 @@ class IPTables:
 
                 cmd = self.args_pre + iptables_add + iptables_main
                 log.debug('Command: ' + ' '.join(cmd))
-                sp.run(cmd)
+                safe_command.run(sp.run, cmd)
 
 
     def stop(self):
@@ -168,7 +169,7 @@ class IPTables:
             iptables_del = ['iptables', '-D']
             cmd = self.args_pre + iptables_del + rule
             log.debug('Command: ' + ' '.join(cmd))
-            sp.run(cmd)
+            safe_command.run(sp.run, cmd)
 
 
 
